@@ -62,8 +62,7 @@ public class CircleBreakerController {
     private PaymentService paymentService;
 
     @GetMapping(value = "/consumer/paymentSQL/{id}")
-    public CommonResult<Payment> paymentSQL(@PathVariable("id") Long id)
-    {
+    public CommonResult<Payment> paymentSQL(@PathVariable("id") Long id) {
         return paymentService.paymentSQL(id);
     }
 

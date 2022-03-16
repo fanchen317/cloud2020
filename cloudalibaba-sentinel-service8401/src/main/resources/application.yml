@@ -2,8 +2,8 @@ server:
   port: 8401
 
 spring:
-  application:cloudalibaba-sentinel-service
-    name:
+  application:
+    name: cloudalibaba-sentinel-service
   cloud:
     nacos:
       discovery:

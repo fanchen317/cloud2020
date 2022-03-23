@@ -5,6 +5,7 @@ import com.fanchen.springcloud.domain.Order;
 import com.fanchen.springcloud.service.AccountService;
 import com.fanchen.springcloud.service.OrderService;
 import com.fanchen.springcloud.service.StorageService;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
      * 简单说：下订单->扣库存->减余额->改状态
      */
     @Override
-    //@GlobalTransactional(name = "fsp-create-order",rollbackFor = Exception.class)
+    @GlobalTransactional(name = "fsp-create-order",rollbackFor = Exception.class)
     public void create(Order order) {
         log.info("----->开始新建订单");
         //1 新建订单
@@ -49,6 +50,7 @@ public class OrderServiceImpl implements OrderService {
         //4 修改订单状态，从零到1,1代表已经完成
         log.info("----->修改订单状态开始");
         orderDao.update(order.getUserId(), 0);
+//        int i = 10 / 0;
         log.info("----->修改订单状态结束");
 
         log.info("----->下订单结束了，O(∩_∩)O哈哈~");
